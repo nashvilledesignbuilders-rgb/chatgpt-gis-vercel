@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: ChatGPT GIS API
+  description: API for querying Metro Nashville and TN parcel data
+  version: "1.0.0"
+servers:
+  - url: https://chatgpt-gis-vercel.vercel.app
+paths:
+  /api/parcel-summary:
+    get:
+      summary: Get normalized parcel summaries for comma-separated APNs
+      parameters:
+        - name: pins
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated APN(s), e.g. pins=03200001000,03200001001
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [metro, tn]
+          description: Source dataset (metro or tn)
+      responses:
+        '200':
+          description: Normalized parcel summaries
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/metro:
+    get:
+      summary: Query Metro Nashville parcels by pin or where clause
+      parameters:
+        - name: pin
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: where
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Metro parcel result
+  /api/tn:
+    get:
+      summary: Query TN parcels by pin or where clause
+      parameters:
+        - name: pin
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: where
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TN parcel result
