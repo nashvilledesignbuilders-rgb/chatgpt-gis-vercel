@@ -1,5 +1,16 @@
 {
   "buildCommand": "next build",
   "outputDirectory": ".next",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "headers": [
+    {
+      "source": "/(.*)\\.yaml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/yaml"
+        }
+      ]
+    }
+  ]
 }
