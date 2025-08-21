@@ -2,4 +2,9 @@
   "buildCommand": "next build",
   "outputDirectory": ".next",
   "framework": "nextjs"
+  "functions": {
+    "app/api/**/route.ts": {
+      "runtime": "nodejs20"
+    }
+  }
 }
