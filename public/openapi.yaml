@@ -4,9 +4,9 @@ info:
   description: API for querying Metro Nashville and TN parcel data
   version: "1.0.0"
 servers:
-  - url: https://chatgpt-gis-vercel.vercel.app
+  - url: https://chatgpt-gis-vercel.vercel.app/api
 paths:
-  /api/parcel-summary:
+  /parcel-summary:
     get:
       summary: Get normalized parcel summaries for comma-separated APNs
       parameters:
@@ -30,7 +30,8 @@ paths:
             application/json:
               schema:
                 type: object
-  /api/metro:
+                additionalProperties: true
+  /metro:
     get:
       summary: Query Metro Nashville parcels by pin or where clause
       parameters:
@@ -51,7 +52,8 @@ paths:
             application/json:
               schema:
                 type: object
-  /api/tn:
+                additionalProperties: true
+  /tn:
     get:
       summary: Query TN parcels by pin or where clause
       parameters:
@@ -72,3 +74,4 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: true
