@@ -1,11 +1,10 @@
-
 openapi: 3.0.1
 info:
   title: ChatGPT GIS API
   description: API for querying Metro Nashville and TN parcel data
   version: "1.0.0"
 servers:
-  - url: https://chatgpt-gis-vercel.vercel.app/
+  - url: https://chatgpt-gis-vercel.vercel.app
 paths:
   /api/parcel-summary:
     get:
@@ -48,6 +47,10 @@ paths:
       responses:
         '200':
           description: Metro parcel result
+          content:
+            application/json:
+              schema:
+                type: object
   /api/tn:
     get:
       summary: Query TN parcels by pin or where clause
@@ -65,3 +68,7 @@ paths:
       responses:
         '200':
           description: TN parcel result
+          content:
+            application/json:
+              schema:
+                type: object
