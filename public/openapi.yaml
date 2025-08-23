@@ -5,7 +5,7 @@ info:
   description: API for querying Metro Nashville and TN parcel data
   version: "1.0.0"
 servers:
-  - url: https://chatgpt-gis-vercel.vercel.app
+  - url: https://chatgpt-gis-vercel.vercel.app/
 paths:
   /api/parcel-summary:
     get:
