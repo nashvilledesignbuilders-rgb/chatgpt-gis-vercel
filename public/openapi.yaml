@@ -1,23 +1,125 @@
 openapi: 3.0.1
 info:
   title: ChatGPT GIS API
-  description: Minimal test spec
+  description: API for querying Metro Nashville and TN parcel data
   version: "1.0.0"
+
 servers:
   - url: "https://chatgpt-gis-vercel.vercel.app/api"
-    description: Production server
+    description: Production API server
+
 paths:
-  /ping:
+  /parcel-summary:
     get:
-      summary: Simple ping endpoint
+      summary: Get normalized parcel summaries for comma-separated APNs
+      parameters:
+        - name: pins
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated APN(s), e.g. `03200001000,03200001001`
+        - name: source
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [metro, tn]
+          description: Source dataset (metro or tn)
       responses:
         '200':
-          description: Pong response
+          description: Normalized parcel summaries
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: pong
+                  parcels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        apn:
+                          type: string
+                          example: "03200001000"
+                        owner:
+                          type: string
+                          example: "John Doe"
+                        acreage:
+                          type: number
+                          example: 1.25
+                        appraised_value:
+                          type: number
+                          example: 250000
+  /metro:
+    get:
+      summary: Query Metro Nashville parcels by pin or where clause
+      parameters:
+        - name: pin
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: where
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Metro parcel result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        apn:
+                          type: string
+                          example: "03200001000"
+                        zoning:
+                          type: string
+                          example: "R10"
+                        owner:
+                          type: string
+                          example: "Jane Smith"
+  /tn:
+    get:
+      summary: Query TN parcels by pin or where clause
+      parameters:
+        - name: pin
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: where
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TN parcel result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        apn:
+                          type: string
+                          example: "09400002000"
+                        county:
+                          type: string
+                          example: "Davidson"
+                        owner:
+                          type: string
+                          example: "Acme Corp"
