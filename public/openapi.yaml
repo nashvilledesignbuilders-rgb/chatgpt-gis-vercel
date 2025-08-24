@@ -8,11 +8,24 @@ servers:
   - url: "https://chatgpt-gis-vercel.vercel.app/api"
     description: Production API server
 
+tags:
+  - name: Health
+    description: Endpoints for checking API status
+  - name: Metro
+    description: Endpoints for querying Metro Nashville parcel data
+  - name: Statewide
+    description: Endpoints for querying Tennessee-wide parcel data
+  - name: Utilities
+    description: Utility and placeholder endpoints
+
 paths:
   /ping:
     get:
+      tags:
+        - Health
       summary: Health check endpoint
       description: Returns a simple pong response to confirm the API is running.
+      operationId: getPing
       responses:
         '200':
           description: Pong response
@@ -27,7 +40,10 @@ paths:
 
   /parcel-summary:
     get:
+      tags:
+        - Statewide
       summary: Get normalized parcel summaries for comma-separated APNs
+      operationId: getParcelSummaries
       parameters:
         - name: pins
           in: query
@@ -76,7 +92,10 @@ paths:
 
   /metro:
     get:
+      tags:
+        - Metro
       summary: Query Metro Nashville parcels by pin or where clause
+      operationId: getMetroParcels
       parameters:
         - name: pin
           in: query
@@ -116,7 +135,10 @@ paths:
 
   /tn:
     get:
+      tags:
+        - Statewide
       summary: Query TN parcels by pin or where clause
+      operationId: getTnParcels
       parameters:
         - name: pin
           in: query
@@ -156,8 +178,11 @@ paths:
 
   /parcel:
     get:
+      tags:
+        - Utilities
       summary: Placeholder parcel endpoint
       description: Returns a placeholder message for the parcel route.
+      operationId: getParcelPlaceholder
       responses:
         '200':
           description: Placeholder response
