@@ -67,6 +67,12 @@ paths:
                         appraised_value:
                           type: number
                           example: 250000
+                        source:
+                          type: string
+                          example: metro
+                        input:
+                          type: string
+                          example: "03200001000"
 
   /metro:
     get:
@@ -104,6 +110,9 @@ paths:
                         owner:
                           type: string
                           example: "Jane Smith"
+                        where:
+                          type: string
+                          example: "zoning='R10'"
 
   /tn:
     get:
@@ -141,3 +150,22 @@ paths:
                         owner:
                           type: string
                           example: "Acme Corp"
+                        where:
+                          type: string
+                          example: "county='Davidson'"
+
+  /parcel:
+    get:
+      summary: Placeholder parcel endpoint
+      description: Returns a placeholder message for the parcel route.
+      responses:
+        '200':
+          description: Placeholder response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Parcel endpoint placeholder"
