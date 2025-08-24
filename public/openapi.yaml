@@ -9,6 +9,22 @@ servers:
     description: Production API server
 
 paths:
+  /ping:
+    get:
+      summary: Health check endpoint
+      description: Returns a simple pong response to confirm the API is running.
+      responses:
+        '200':
+          description: Pong response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: pong
+
   /parcel-summary:
     get:
       summary: Get normalized parcel summaries for comma-separated APNs
@@ -51,6 +67,7 @@ paths:
                         appraised_value:
                           type: number
                           example: 250000
+
   /metro:
     get:
       summary: Query Metro Nashville parcels by pin or where clause
@@ -87,6 +104,7 @@ paths:
                         owner:
                           type: string
                           example: "Jane Smith"
+
   /tn:
     get:
       summary: Query TN parcels by pin or where clause
