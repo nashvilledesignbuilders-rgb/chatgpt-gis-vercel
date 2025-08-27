@@ -5,7 +5,7 @@ info:
   version: "1.0.0"
 
 servers:
-  - url: "https://chatgpt-gis-vercel.vercel.app/api"
+  - url: "https://chatgpt-gis-vercel.vercel.app"
     description: Production API server
 
 tags:
@@ -19,7 +19,7 @@ tags:
     description: Utility and placeholder endpoints
 
 paths:
-  /ping:
+  /api/ping:
     get:
       tags:
         - Health
@@ -38,7 +38,7 @@ paths:
                     type: string
                     example: pong
 
-  /parcel-summary:
+  /api/parcel-summary:
     get:
       tags:
         - Statewide
@@ -90,7 +90,7 @@ paths:
                           type: string
                           example: "03200001000"
 
-  /metro:
+  /api/metro:
     get:
       tags:
         - Metro
@@ -133,7 +133,7 @@ paths:
                           type: string
                           example: "zoning='R10'"
 
-  /tn:
+  /api/tn:
     get:
       tags:
         - Statewide
@@ -176,7 +176,7 @@ paths:
                           type: string
                           example: "county='Davidson'"
 
-  /parcel:
+  /api/parcel:
     get:
       tags:
         - Utilities
