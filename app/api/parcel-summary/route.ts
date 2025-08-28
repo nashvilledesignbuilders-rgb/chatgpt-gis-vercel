@@ -48,11 +48,17 @@ export async function GET(req: Request) {
 
     for (const pin of pins) {
       let endpoint = "";
-      if (source === "metro") {
-        endpoint = `https://maps.nashville.gov/arcgis/rest/services/Cadastral/Parcels/MapServer/0/query?f=json&where=${encodeURIComponent(`APN='${pin}'`)}&outFields=*`;
-      } else {
-        endpoint = `https://tnmap.tn.gov/arcgis/rest/services/Parcels/MapServer/0/query?f=json&where=${encodeURIComponent(`APN='${pin}'`)}&outFields=*`;
-      }
+        if (source === "metro") {
+          endpoint =
+            "https://maps.nashville.gov/arcgis/rest/services/Cadastral/Parcels/MapServer/0/query?f=json&where=" +
+            encodeURIComponent(`APN='${pin}'`) +
+            "&outFields=*";
+        } else {
+          endpoint =
+            "https://tnmap.tn.gov/arcgis/rest/services/Parcels/MapServer/0/query?f=json&where=" +
+            encodeURIComponent(`APN='${pin}'`) +
+            "&outFields=*";
+        }
       const r = await fetch(endpoint);
       const data = await r.json();
       const feature = Array.isArray(data.features) && data.features[0] ? data.features[0] : null;
