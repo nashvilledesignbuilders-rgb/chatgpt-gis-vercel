@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     const where = urlObj.searchParams.get("where");
 
     if (!pin && !where) {
-      return NextResponse.json({ error: "Provide pin or where query param" }, { status: 400 });
+      return NextResponse.json({ error: "Provide 'pin' or 'where' query parameter" }, { status: 400 });
     }
 
     const whereClause = pin ? `PIN='${pin}'` : where;

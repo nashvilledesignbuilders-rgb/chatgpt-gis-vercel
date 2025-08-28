@@ -66,7 +66,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  parcels:
+                  source:
+                    type: string
+                    example: metro
+                  count:
+                    type: integer
+                    example: 1
+                  features:
                     type: array
                     items:
                       type: object
@@ -77,18 +83,27 @@ paths:
                         owner:
                           type: string
                           example: "John Doe"
-                        acreage:
+                        prop_addr:
+                          type: string
+                          example: "123 Main St"
+                        acres:
                           type: number
                           example: 1.25
-                        appraised_value:
+                        assessed_total:
                           type: number
                           example: 250000
-                        source:
-                          type: string
-                          example: metro
-                        input:
-                          type: string
-                          example: "03200001000"
+                        land_assessed:
+                          type: number
+                          example: 100000
+                        impr_assessed:
+                          type: number
+                          example: 150000
+                        geometry:
+                          type: object
+                          description: Esri JSON geometry object
+                        raw:
+                          type: object
+                          description: Original feature from upstream API
 
   /api/metro:
     get:
